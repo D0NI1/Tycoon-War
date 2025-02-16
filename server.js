@@ -8,8 +8,10 @@ const PORT = process.env.PORT || 10000;
 app.use(bodyParser.json());
 
 const cors = require('cors');
-app.use(cors());  // Allow cross-origin requests from any origin
-
+app.use(cors({
+  origin: 'https://d0ni1.github.io/Tycoon-War', // Replace with your frontend domain
+  credentials: true, // Allow cookies and credentials
+}));
 // Discord Webhook URL (replace with your actual webhook URL)
 const discordWebhookURL = 'https://discord.com/api/webhooks/1340725278187716718/RBrvI6U4KAtkpWCue1J6nw9RYav79rK9z54_tkMYurx1AstidGuMWVoUTtwrH5PvRLgx';
 
