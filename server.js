@@ -3,15 +3,13 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 
 const cors = require('cors');
-app.use(cors({
-  origin: 'https://d0ni1.github.io/Tycoon-War', // Replace with your frontend domain
-  credentials: true, // Allow cookies and credentials
-}));
+app.use(cors());  // Allow cross-origin requests from any origin
+
 // Discord Webhook URL (replace with your actual webhook URL)
 const discordWebhookURL = 'https://discord.com/api/webhooks/1340725278187716718/RBrvI6U4KAtkpWCue1J6nw9RYav79rK9z54_tkMYurx1AstidGuMWVoUTtwrH5PvRLgx';
 
