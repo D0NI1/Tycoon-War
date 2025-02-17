@@ -585,22 +585,23 @@
   </main>
 
   <script>
-    let cart = [];
+  let cart = [];
     let cartTotal = 0;
-
+    const API_URL = 'https://tycoon-war.onrender.com'; // Replace with your Render server URL
+    
     function addToCart(name, price, image) {
       cart.push({ name, price, image });
       cartTotal += price;
       updateCart();
     }
-
+    
     function updateCart() {
       const cartItems = document.getElementById('cart-items');
       const cartCount = document.getElementById('cart-count');
       const cartTotalElement = document.getElementById('cart-total');
-
+    
       cartItems.innerHTML = '';
-      cart.forEach(item => {
+      cart.forEach((item, index) => {
         const cartItem = document.createElement('div');
         cartItem.classList.add('cart-item');
         cartItem.innerHTML = `
@@ -609,74 +610,80 @@
             <h3>${item.name}</h3>
             <p>$${item.price.toFixed(2)}</p>
           </div>
-          <div class="cart-item-remove" onclick="removeFromCart('${item.name}', ${item.price})">×</div>
+          <div class="cart-item-remove" onclick="removeFromCart(${index})">×</div>
         `;
         cartItems.appendChild(cartItem);
       });
-
+    
       cartCount.textContent = cart.length;
       cartTotalElement.textContent = cartTotal.toFixed(2);
     }
-
-    function removeFromCart(name, price) {
-      cart = cart.filter(item => item.name !== name);
-      cartTotal -= price;
-      updateCart();
+    
+    function removeFromCart(index) {
+      if (index >= 0 && index < cart.length) {
+        cartTotal -= cart[index].price;
+        cart.splice(index, 1);
+        updateCart();
+      }
     }
-
+    
     function toggleCart() {
-      const cartModal = document.getElementById('cart-modal');
-      cartModal.classList.toggle('open');
+      document.getElementById('cart-modal').classList.toggle('open');
     }
-
+    
     function openCheckout() {
-      const checkoutModal = document.getElementById('checkout-modal');
-      checkoutModal.classList.add('open');
+      document.getElementById('checkout-modal').classList.add('open');
     }
-
-    function submitOrder() {
-      const robloxUsername = document.getElementById('roblox-username').value;
-      const robloxDisplayName = document.getElementById('roblox-display-name').value;
-
+    
+    async function submitOrder() {
+      const robloxUsername = document.getElementById('roblox-username').value.trim();
+      const robloxDisplayName = document.getElementById('roblox-display-name').value.trim();
+    
       if (!robloxUsername || !robloxDisplayName) {
-        alert('Please fill in both Roblox username and display name.');
+        alert('⚠️ Please enter both your Roblox username and display name.');
         return;
       }
-
+    
+      if (cart.length === 0) {
+        alert('🛒 Your cart is empty. Add some items before checking out.');
+        return;
+      }
+    
       const order = {
         items: cart,
         total: cartTotal,
         robloxUsername,
-        robloxDisplayName
+        robloxDisplayName,
       };
-
-      // Send order data to the backend
-      fetch('http://localhost:5000/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(order)
-      })
-      .then(response => response.json())
-      .then(data => {
+    
+      try {
+        const response = await fetch(`${API_URL}/checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order),
+        });
+    
+        const data = await response.json();
+    
         if (data.success) {
-          alert('Order submitted successfully!');
-          alert('𝐍𝐨𝐭𝐞: 𝐈𝐭 𝐜𝐚𝐧 𝐭𝐚𝐤𝐞 𝐬𝐨𝐦𝐞 𝐭𝐢𝐦𝐞 𝐮𝐧𝐭𝐢𝐥 𝐢𝐭𝐞𝐦𝐬 𝐠𝐞𝐭 𝐚𝐝𝐝𝐞𝐝 𝐭𝐨 𝐲𝐨𝐮𝐫 𝐚𝐜𝐜𝐨𝐮𝐧𝐭.');
+          alert('✅ Order submitted successfully!');
+          alert('⏳ Note: It may take some time for items to be added to your account.');
+          
+          // Clear cart and update UI
           cart = [];
           cartTotal = 0;
           updateCart();
           toggleCart();
           document.getElementById('checkout-modal').classList.remove('open');
         } else {
-          alert('Something went wrong with your order. Please try again.');
+          alert(`❌ Order failed: ${data.error || 'Please try again later.'}`);
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
-      });
+        alert('⚠️ An error occurred. Please check your connection and try again.');
+      }
     }
+    
   </script>
 
 <footer id="site-footer">
