@@ -1,3 +1,4 @@
+
 <!-- 
   DDDDD   OOOOO   N   N   III   W   W  EEEEE  BBBBB      DDDDD   EEEEE  V   V
   D   D  O     O  NN  N    I    W   W  E      B    B     D   D   E      V   V
@@ -25,7 +26,7 @@
   
   This is a large comment block in CSS. Everything between the //
 -->
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang='en-US'>
 <head>
   <!-- Meta Tags -->
@@ -36,6 +37,8 @@
   <link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/poppins-v20-latin-500-0da2d17e738f46d2a09e6fb7969da451719a9820.woff2' rel='preload' type='font/woff2'>
   <link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/poppins-v20-latin-700-cb726212d5d525021752a1d8470a0fb593e0c49e.woff2' rel='preload' type='font/woff2'>
   <link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/source-code-pro-v22-latin_latin-ext-regular-ac7e13e27e17f830518f9899f1928cb5bfde3c3b.woff2' rel='preload' type='font/woff2'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
   <style>
     @font-face {
       font-display: fallback;
@@ -286,53 +289,53 @@
     </div>
   </header>
 <br>
-  <turbo-frame data-turbo-action="advance" id="tf-main">
-    <div id='page-leaderboard'>
-      <div class='lg-container'>
-        <h1 class='text-h1 mb-12'>Leaderboard</h1>
-        <hr class='c-divider'>
 
-        <!-- Leaderboard Table -->
-        <table class="leaderboard-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Player1</td>
-              <td>10,000</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Player2</td>
-              <td>9,500</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Player3</td>
-              <td>9,000</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Player4</td>
-              <td>8,500</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Player5</td>
-              <td>8,000</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<turbo-frame data-turbo-action="advance" id="tf-main">
+  <div id="page-leaderboard">
+    <div class="lg-container">
+      <h1 class="text-h1 mb-12">Leaderboard</h1>
+      <hr class="c-divider">
+
+      <!-- Leaderboard Table -->
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#1</td>
+            <td>Player1</td>
+            <td><i class="fas fa-star"></i> 10,000</td>
+          </tr>
+          <tr>
+            <td>#2</td>
+            <td>Player2</td>
+            <td><i class="fas fa-star"></i> 9,500</td>
+          </tr>
+          <tr>
+            <td>#3</td>
+            <td>Player3</td>
+            <td><i class="fas fa-star"></i> 9,000</td>
+          </tr>
+          <tr>
+            <td>#4</td>
+            <td>Player4</td>
+            <td><i class="fas fa-star"></i> 8,500</td>
+          </tr>
+          <tr>
+            <td>#5</td>
+            <td>Player5</td>
+            <td><i class="fas fa-star"></i> 8,000</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </turbo-frame>
-
+  </div>
+</turbo-frame>
   <!-- Decorative Line -->
   <div class="decorative-line"></div>
 </body>
