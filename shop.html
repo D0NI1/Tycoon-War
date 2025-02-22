@@ -418,6 +418,17 @@
       background-color: #e2e8f0;
       margin: 24px 0;
     }
+
+    .loading-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
     </style>
 </head>
 
@@ -549,7 +560,10 @@
       <input type="text" id="roblox-username" placeholder="Enter your Roblox username">
       <label for="roblox-display-name">Roblox Display Name</label>
       <input type="text" id="roblox-display-name" placeholder="Enter your Roblox display name">
-      <button class="btn-submit" onclick="submitOrder()">Submit Order</button>
+      <button class="btn-submit" onclick="submitOrder()" id="submit-order-btn">
+        <span id="submit-text">Submit Order</span>
+        <span id="loading-spinner" class="loading-spinner" style="display: none;">⌛</span>
+      </button>
     </div>
   </div>
 
@@ -636,54 +650,66 @@
     }
     
     async function submitOrder() {
-      const robloxUsername = document.getElementById('roblox-username').value.trim();
-      const robloxDisplayName = document.getElementById('roblox-display-name').value.trim();
-    
-      if (!robloxUsername || !robloxDisplayName) {
-        alert('⚠️ Please enter both your Roblox username and display name.');
-        return;
-      }
-    
-      if (cart.length === 0) {
-        alert('🛒 Your cart is empty. Add some items before checking out.');
-        return;
-      }
-    
-      const order = {
-        items: cart,
-        total: cartTotal,
-        robloxUsername,
-        robloxDisplayName,
-      };
-    
-      try {
-        const response = await fetch(`${API_URL}/checkout`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(order),
-        });
-    
-        const data = await response.json();
-    
-        if (data.success) {
-          alert('✅ Order submitted successfully!');
-          alert('⏳ Note: It may take some time for items to be added to your account.');
-          
-          // Clear cart and update UI
-          cart = [];
-          cartTotal = 0;
-          updateCart();
-          toggleCart();
-          document.getElementById('checkout-modal').classList.remove('open');
-        } else {
-          alert(`❌ Order failed: ${data.error || 'Please try again later.'}`);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('⚠️ An error occurred. Please check your connection and try again.');
-      }
+  const robloxUsername = document.getElementById('roblox-username').value.trim();
+  const robloxDisplayName = document.getElementById('roblox-display-name').value.trim();
+  const submitButton = document.getElementById('submit-order-btn');
+  const submitText = document.getElementById('submit-text');
+  const loadingSpinner = document.getElementById('loading-spinner');
+
+  if (!robloxUsername || !robloxDisplayName) {
+    alert('⚠️ Please enter both your Roblox username and display name.');
+    return;
+  }
+
+  if (cart.length === 0) {
+    alert('🛒 Your cart is empty. Add some items before checking out.');
+    return;
+  }
+
+  // Disable the button and show the loading spinner
+  submitButton.disabled = true;
+  submitText.style.display = 'none';
+  loadingSpinner.style.display = 'inline-block';
+
+  const order = {
+    items: cart,
+    total: cartTotal,
+    robloxUsername,
+    robloxDisplayName,
+  };
+
+  try {
+    const response = await fetch(`${API_URL}/checkout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert('✅ Order submitted successfully!');
+      alert('⏳ Note: It may take some time for items to be added to your account.');
+
+      // Clear cart and update UI
+      cart = [];
+      cartTotal = 0;
+      updateCart();
+      toggleCart();
+      document.getElementById('checkout-modal').classList.remove('open');
+    } else {
+      alert(`❌ Order failed: ${data.error || 'Please try again later.'}`);
     }
-    
+  } catch (error) {
+    console.error('Error:', error);
+    alert('⚠️ An error occurred. Please check your connection and try again.');
+  } finally {
+    // Re-enable the button and hide the loading spinner
+    submitButton.disabled = false;
+    submitText.style.display = 'inline-block';
+    loadingSpinner.style.display = 'none';
+  }
+}
   </script>
 
 <footer id="site-footer">
