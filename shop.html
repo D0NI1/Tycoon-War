@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Meta Tags -->
+<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+<link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/poppins-v20-latin-regular-ac6d71b4d5fdd2b3dabc9a06ff6c001e4251da0b.woff2' rel='preload' type='font/woff2'>
+<link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/poppins-v20-latin-600-179f97ec0275f09603a8db94d4380eb584d81cd5.woff2' rel='preload' type='font/woff2'>
+<link rel="stylesheet" href="https://assets.exercism.org/assets/website-8b1ccfe062d0dfaed3ca89ad4cb61f0ce70aa51c.css" data-turbo-track="reload" />
+<link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/poppins-v20-latin-500-0da2d17e738f46d2a09e6fb7969da451719a9820.woff2' rel='preload' type='font/woff2'>
+<link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/poppins-v20-latin-700-cb726212d5d525021752a1d8470a0fb593e0c49e.woff2' rel='preload' type='font/woff2'>
+<link as='font' crossorigin='anonymous' href='https://assets.exercism.org/assets/source-code-pro-v22-latin_latin-ext-regular-ac7e13e27e17f830518f9899f1928cb5bfde3c3b.woff2' rel='preload' type='font/woff2'>
+
+
+<style>
+      @font-face {
+        font-display: fallback;
+        font-family: PoppinsInitial;
+        font-weight: 400;
+        src: url(https://assets.exercism.org/assets/poppins-v20-latin-regular-ac6d71b4d5fdd2b3dabc9a06ff6c001e4251da0b.woff2) format('woff2');
+      }
+    </style>
+    <style>
+      @font-face {
+        font-display: fallback;
+        font-family: PoppinsInitial;
+        font-weight: 500;
+        src: url(https://assets.exercism.org/assets/poppins-v20-latin-600-179f97ec0275f09603a8db94d4380eb584d81cd5.woff2) format('woff2');
+      }
+    </style>
+    <style>
+      @font-face {
+        font-display: fallback;
+        font-family: PoppinsInitial;
+        font-weight: 600;
+        src: url(https://assets.exercism.org/assets/poppins-v20-latin-600-179f97ec0275f09603a8db94d4380eb584d81cd5.woff2) format('woff2');
+      }
+    </style>
+    <style>
+      @font-face {
+        font-display: fallback;
+        font-family: PoppinsInitial;
+        font-weight: 700;
+        src: url(https://assets.exercism.org/assets/poppins-v20-latin-600-179f97ec0275f09603a8db94d4380eb584d81cd5.woff2) format('woff2');
+      }
+    </style>
+    <style>
+      body {
+        --body-font: Poppins, PoppinsInitial, sans-serif;
+        font-family: var(--body-font);
+        -webkit-font-smoothing: antialiased;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
+        color: #1a1a1a;
+      }
+      .lg-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .text-h1 {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #1e293b;
+        text-align: center;
+      }
+      .text-h2 {
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1.3;
+        color: #1e293b;
+      }
+      .text-p-large {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #475569;
+      }
+      .text-p-base {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #64748b;
+      }
+      .c-divider {
+        border: 0;
+        height: 1px;
+        background-color: #e2e8f0;
+        margin: 24px 0;
+      }
+      .btn-primary {
+        background-color: #3b82f6;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #2563eb;
+      }
+      .announcement-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 24px;
+        margin-bottom: 24px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .announcement-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+      .announcement-card h3 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 12px;
+      }
+      .announcement-card p {
+        margin: 0;
+      }
+      .announcement-card .date {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 16px;
+      }
+      .announcement-card .icon {
+        font-size: 24px;
+        color: #3b82f6;
+        margin-bottom: 16px;
+      }
+/* Product Section */
+.shop-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b; /* Darker text for better contrast */
+  margin-top: 50px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.product-card {
+  background-color: #ffffff; /* White background */
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e2e8f0; /* Subtle border for better definition */
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.product-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 2px solid #e2e8f0; /* Subtle border for separation */
+}
+
+.product-card .info {
+  padding: 20px;
+}
+
+.product-card .info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e293b; /* Darker text for better readability */
+}
+
+.product-card .info p {
+  font-size: 14px;
+  color: #475569; /* Slightly darker gray for better contrast */
+  margin-top: 8px;
+}
+
+.product-card .price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3b82f6; /* Bright blue for emphasis */
+  margin-top: 10px;
+}
+
+.btn-buy {
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Gradient for a modern look */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Cart Icon */
+.cart-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Gradient for a modern look */
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.cart-icon span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Cart Modal */
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #ffffff; /* White background */
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.cart-modal.open {
+  display: block;
+}
+
+.cart-modal h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b; /* Darker text for better readability */
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.cart-item-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.cart-item-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b; /* Darker text for better readability */
+}
+
+.cart-item-info p {
+  font-size: 14px;
+  color: #475569; /* Slightly darker gray for better contrast */
+}
+
+.cart-item-remove {
+  color: #ef4444; /* Red for warning/remove action */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cart-total {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b; /* Darker text for better readability */
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0; /* Subtle border for separation */
+}
+
+.btn-checkout {
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Gradient for a modern look */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-checkout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Checkout Modal */
+.checkout-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1001;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-modal.open {
+  display: flex;
+}
+
+.checkout-content {
+  background-color: #ffffff; /* White background */
+  border-radius: 12px;
+  padding: 24px;
+  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b; /* Darker text for better readability */
+  margin-bottom: 20px;
+}
+
+.checkout-content label {
+  font-size: 14px;
+  color: #475569; /* Slightly darker gray for better contrast */
+  display: block;
+  margin-bottom: 8px;
+}
+
+.checkout-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0; /* Subtle border for inputs */
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #1e293b; /* Darker text for better readability */
+}
+
+.checkout-content .btn-submit {
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Gradient for a modern look */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-content .btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+      .decorative-line {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #3b82f6, #9333ea);
+      margin: 40px 0;
+    }
+
+    .c-divider {
+      border: 0;
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 24px 0;
+    }
+    </style>
+</head>
+
+<body>
+  <script src="https://assets.exercism.org/assets/landing-8cfd9542effc63d95eab20ecca79a1cdcf7432f1.js" crossorigin="anonymous" type="module" data-turbo-track="reload" data-turbo-eval="false" defer="defer"></script>
+  <script async data-api='/usage/api/event' data-domain='exercism.org' src='/usage/js/script.js'></script>
+
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <link href='https://tycoonwars.com' rel='canonical'>
+  <meta name="csrf-param" content="authenticity_token" />
+  <meta name="csrf-token" content="etve_9p5BgKo4B-7aL_zTEfLVnpynq1F9C4x09E_GmJcvEWKhy4cA34YMp78l7U4pcIyTuiXHaRwsE7LLOyhOQ" />
+
+  <meta name="action-cable-url" content="wss://tycoonwars.com/cable" />
+  <meta content='no-cache' name='turbo-cache-control'>
+  <meta content='language-servers-925786784.eu-west-2.elb.amazonaws.com' name='language-server-url'>
+  <meta content='https://tycoonwars.com/api/v2/bug_reports' name='bug-reports-url'>
+  <meta content='https://tycoonwars.com/api/v2/markdown/parse' name='parse-markdown-url'>
+  <meta content='' name='user-id'>
+  <meta content='pk_live_51IDGMXEoOT0Jqx0UGsyx7fUW7iojTCPobNQDDoVdVY64qsyeNyFDqQRAgXSdj2HF8mYzPGxsBWIEFPnenq0lEhLH00x7KfG52T' name='stripe-publishable-key'>
+  <title>Shop - Tycoon Wars</title>
+  <meta content='Stay updated with the latest news and announcements for Tycoon Wars, the ultimate Roblox tycoon game.' name='description'>
+  <meta content='width=device-width, initial-scale=1, viewport-fit=cover' name='viewport'>
+  <meta content='summary_large_image' name='twitter:card'>
+  <meta content='@tycoonwars' name='twitter:site'>
+  <meta content='@tycoonwars' name='twitter:creator'>
+  <meta content='https://tycoonwars.com' name='twitter:url'>
+  <meta content='Announcements - Tycoon Wars' name='twitter:title'>
+  <meta content='Stay updated with the latest news and announcements for Tycoon Wars, the ultimate Roblox tycoon game.' name='twitter:description'>
+  <meta content='https://assets.tycoonwars.com/meta/og.png' name='twitter:image'>
+  <meta content='Announcements - Tycoon Wars' property='og:title'>
+  <meta content='website' property='og:type'>
+  <meta content='https://tycoonwars.com' property='og:url'>
+  <meta content='https://assets.tycoonwars.com/meta/og.png' property='og:image'>
+  <meta content='Stay updated with the latest news and announcements for Tycoon Wars, the ultimate Roblox tycoon game.' property='og:description'>
+  <meta content='Tycoon Wars' property='og:site_name'>
+  <meta content='744760440' property='fb:admins'>
+  <link href='https://assets.tycoonwars.com/meta/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180'>
+  <link href='https://assets.tycoonwars.com/meta/favicon-32x32.png' rel='icon' sizes='32x32' type='image/png'>
+  <link href='https://assets.tycoonwars.com/meta/favicon-16x16.png' rel='icon' sizes='16x16' type='image/png'>
+  <link href='/site.webmanifest' rel='manifest'>
+  <link href='https://tycoonwars.com/blog.rss' rel='alternate' title='Tycoon Wars&#39; Blog' type='application/rss+xml'>
+  <meta content='ca-pub-1298009554972786' name='google-adsense-account'>
+</head>
+
+<body class='namespace- controller-pages action-index theme-light user-signed_out'>
+  <header id="site-header">
+    <div class="lg-container container">
+      <a class="exercism-link xl:block" data-turbo-frame="tf-main" href="/">
+        <img alt="Tycoon Wars" class="c-icon" src="https://assets.tycoonwars.com/assets/icons/tycoon-wars-logo.svg" />
+      </a>
+      <nav role="navigation">
+        <ul>
+          <li class="nav-element">
+            <a tabindex="0" role="none" class="nav-element-link nav-element-focusable" href="index.html">
+              <span tabindex="-1" role="none" class="nav-element-label">Home</span>
+            </a>
+          </li>
+          <li class="nav-element">
+            <a tabindex="0" role="none" class="nav-element-link nav-element-focusable" href="announcements.html">
+              <span tabindex="-1" role="none" class="nav-element-label">Announcements</span>
+            </a>
+          </li>
+          <li class="nav-element">
+            <a tabindex="0" role="none" class="nav-element-link nav-element-focusable" href="about.html">
+              <span tabindex="-1" role="none" class="nav-element-label">About</span>
+            </a>
+          </li>
+          <li class="nav-element">
+            <a tabindex="0" role="none" class="nav-element-link nav-element-focusable" href="leaderboard.html">
+              <span tabindex="-1" role="none" class="nav-element-label">Leaderboard</span>
+            </a>
+          </li>
+          <li class="nav-element">
+            <a tabindex="0" role="none" class="nav-element-link nav-element-focusable" href="shop.html">
+              <span tabindex="-1" role="none" class="nav-element-label">Shop</span>
+            </a>
+          </li>
+          <li class="nav-element">
+            <a tabindex="0" role="none" class="nav-element-link nav-element-focusable" href="contact.html">
+              <span tabindex="-1" role="none" class="nav-element-label">Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <turbo-frame data-turbo-action="advance" id="tf-main">
+    <div id='page-landing'>
+      <header class='pt-24 sm:pt-32 md:pt-40 pb-56 sm:pb-56 c-header-with-bg'>
+        <div class='lg-container flex items-start md:items-center flex-col-reverse md:flex-row'>
+          <div class='lhs md:items-center lg:items-start md:text-center lg:text-left'>
+            <h1 class='text-h0 mb-12'>
+              Tycoon Wars
+              <strong class='leading-none font-bold'>Shopping Page</strong>
+              Roblox.
+            </h1>
+            <p class='text-p-xlarge mb-24'>
+              Official Shopping Website of
+              <em class='not-italic font-medium text-textColor2'>Tycoon Wars</em>
+              A game with unique features and a lot of fun.
+              <strong class='text-textColor2'>100% The Best Tycoon Game.</strong>
+            </p>
+          </div>
+          <div class='graphic grid md:hidden lg:grid lg:ml-24 mb-16 lg:mb-0'>
+            <img alt="" class="c-icon" src="https://i.imgur.com/mfyKUco.png" />
+          </div>
+
+          </div>
+        </div>
+      </header>
+  <!-- Cart Icon -->
+  <div class="cart-icon" onclick="toggleCart()">
+    <span id="cart-count">🛒</span>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cart-modal">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total: $<span id="cart-total">0.00</span></div>
+    <button class="btn-checkout" onclick="openCheckout()">Checkout</button>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="checkout-modal" id="checkout-modal">
+    <div class="checkout-content">
+      <h2>Checkout</h2>
+      <label for="roblox-username">Roblox Username</label>
+      <input type="text" id="roblox-username" placeholder="Enter your Roblox username">
+      <label for="roblox-display-name">Roblox Display Name</label>
+      <input type="text" id="roblox-display-name" placeholder="Enter your Roblox display name">
+      <button class="btn-submit" onclick="submitOrder()">Submit Order</button>
+    </div>
+  </div>
+
+  <main>
+    
+    <h1 class="shop-title">Shop - Tycoon Wars</h1>
+
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <img src="https://tr.rbxcdn.com/180DAY-eb035d1bdbaa1ef1fce60a61633ce2f7/420/420/Image/Png/noFilter" alt="Premium Tycoon Pass">
+        <div class="info">
+          <h3>Premium Tycoon Pass</h3>
+          <p>Get access to exclusive content, boosts, and more in Tycoon Wars!</p>
+          <div class="price">$9.99</div>
+          <button class="btn-buy" onclick="addToCart('Premium Tycoon Pass', 9.99, 'https://tr.rbxcdn.com/180DAY-eb035d1bdbaa1ef1fce60a61633ce2f7/420/420/Image/Png/noFilter')">Add to Cart</button>
+        </div>
+      </div>
+      
+      <!-- Product 2 -->
+      <div class="product-card">
+        <img src="https://tr.rbxcdn.com/180DAY-dc11dcd5e370ff1d9ebba962ad24370a/420/420/Image/Png/noFilter" alt="Golden Tycoon Pack">
+        <div class="info">
+          <h3>Golden Tycoon Pack</h3>
+          <p>Unlock the rarest tycoon items and show off your empire!</p>
+          <div class="price">$19.99</div>
+          <button class="btn-buy" onclick="addToCart('Golden Tycoon Pack', 19.99, 'https://tr.rbxcdn.com/180DAY-dc11dcd5e370ff1d9ebba962ad24370a/420/420/Image/Png/noFilter')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- More products... -->
+    </div>
+  </main>
+
+  <script>
+  let cart = [];
+    let cartTotal = 0;
+    const API_URL = 'https://tycoon-war.onrender.com'; // Replace with your Render server URL
+    
+    function addToCart(name, price, image) {
+      cart.push({ name, price, image });
+      cartTotal += price;
+      updateCart();
+    }
+    
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotalElement = document.getElementById('cart-total');
+    
+      cartItems.innerHTML = '';
+      cart.forEach((item, index) => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <h3>${item.name}</h3>
+            <p>$${item.price.toFixed(2)}</p>
+          </div>
+          <div class="cart-item-remove" onclick="removeFromCart(${index})">×</div>
+        `;
+        cartItems.appendChild(cartItem);
+      });
+    
+      cartCount.textContent = cart.length;
+      cartTotalElement.textContent = cartTotal.toFixed(2);
+    }
+    
+    function removeFromCart(index) {
+      if (index >= 0 && index < cart.length) {
+        cartTotal -= cart[index].price;
+        cart.splice(index, 1);
+        updateCart();
+      }
+    }
+    
+    function toggleCart() {
+      document.getElementById('cart-modal').classList.toggle('open');
+    }
+    
+    function openCheckout() {
+      document.getElementById('checkout-modal').classList.add('open');
+    }
+    
+    async function submitOrder() {
+      const robloxUsername = document.getElementById('roblox-username').value.trim();
+      const robloxDisplayName = document.getElementById('roblox-display-name').value.trim();
+    
+      if (!robloxUsername || !robloxDisplayName) {
+        alert('⚠️ Please enter both your Roblox username and display name.');
+        return;
+      }
+    
+      if (cart.length === 0) {
+        alert('🛒 Your cart is empty. Add some items before checking out.');
+        return;
+      }
+    
+      const order = {
+        items: cart,
+        total: cartTotal,
+        robloxUsername,
+        robloxDisplayName,
+      };
+    
+      try {
+        const response = await fetch(`${API_URL}/checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order),
+        });
+    
+        const data = await response.json();
+    
+        if (data.success) {
+          alert('✅ Order submitted successfully!');
+          alert('⏳ Note: It may take some time for items to be added to your account.');
+          
+          // Clear cart and update UI
+          cart = [];
+          cartTotal = 0;
+          updateCart();
+          toggleCart();
+          document.getElementById('checkout-modal').classList.remove('open');
+        } else {
+          alert(`❌ Order failed: ${data.error || 'Please try again later.'}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('⚠️ An error occurred. Please check your connection and try again.');
+      }
+    }
+    
+  </script>
+
+<footer id="site-footer">
+  <div class='external-section pt-48 pb-0'>
+    <div class='lg-container flex flex-col lg:flex-row'>
+      <div class='lhs mr-auto mb-20 lg:mb-0'>
+        <img alt="" class="cC-icon" height="200" width="100" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/1/5/2/1521a31b2fcad0d1961689d3a625db97a8cf4cc2.png" />
+        <h2 class='text-h3 mb-4'>Tycoon Wars</h2>
+        <p class='text-p-large'>
+          Build, compete, and dominate in Tycoon Wars, the ultimate Roblox tycoon game. Create your empire and rise to the top!
+        </p>
+  
+    <div class='socials mt-24 mb-40 md:mb-56'>
+      <a class="icon twitter" href="https://twitter.com/tycoonwars"><img alt="" class="c-icon" src="https://assets.tycoonwars.com/assets/icons/twitter.svg" /></a>
+      <a class="icon facebook" href="https://facebook.com/tycoonwars"><img alt="" class="c-icon" src="https://assets.tycoonwars.com/assets/icons/facebook.svg" /></a>
+      <a class="icon discord" href="https://discord.gg/tycoonwars"><img alt="" class="c-icon" src="https://assets.tycoonwars.com/assets/icons/discord.svg" /></a>
+    </div>
+    <hr>
+    <div class='legals mt-24 md:mt-32 mb-32 md:mb-40 flex md:items-center flex-col md:flex-row'>
+      <div class='company mb-16 md:mb-0 md:mr-32'>
+        Tycoon Wars is a game developed by <a href="https://roblox.com">Synergy & Dev Team</a>.
+      </div>
+      <div class='copyright md:ml-auto'>
+        © 2025 Tycoon Wars
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+</html>
